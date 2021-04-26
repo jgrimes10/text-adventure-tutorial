@@ -58,7 +58,6 @@ custom_styles/panel = SubResource( 2 )
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/MarginContainer/Rows/GameInfo"]
 margin_right = 984.0
 margin_bottom = 480.0
-follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="HistoryRows" type="VBoxContainer" parent="Background/MarginContainer/Rows/GameInfo/ScrollContainer"]
