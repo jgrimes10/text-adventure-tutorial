@@ -7,7 +7,7 @@ const InputResponse = preload("res://InputResponse.tscn")
 
 # Grab the history_rows node so we can make the new InputReponse
 # scenes children of it
-onready var history_rows = $Background/MarginContainer/Rows/GameInfo/HistoryRows
+onready var history_rows = $Background/MarginContainer/Rows/GameInfo/ScrollContainer/HistoryRows
 
 
 func _on_Input_text_entered(new_text: String) -> void:
