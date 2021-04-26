@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Input.gd" type="Script" id=1]
 [ext_resource path="res://fonts/font_resources/plex_mono_28.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Game.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
@@ -19,6 +20,10 @@ bg_color = Color( 0.355469, 0.355469, 0.355469, 1 )
 [node name="Game" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -78,3 +83,5 @@ custom_fonts/font = ExtResource( 2 )
 max_length = 48
 caret_blink = true
 script = ExtResource( 1 )
+[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
+[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]

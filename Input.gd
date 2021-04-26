@@ -8,6 +8,9 @@ func _ready() -> void:
 	grab_focus()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _on_Input_text_entered(new_text: String) -> void:
+	# TODO: If desired, in the future, store the previous commands and
+	# allow the player to cycle through them for quick inputs
+
+	# When the user presses enter, clear the input field
+	clear()
