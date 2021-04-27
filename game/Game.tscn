@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Input.gd" type="Script" id=1]
-[ext_resource path="res://fonts/font_resources/plex_mono_28.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Game.gd" type="Script" id=3]
-[ext_resource path="res://CommandProcessor.gd" type="Script" id=4]
-[ext_resource path="res://Room.tscn" type="PackedScene" id=5]
-[ext_resource path="res://RoomManager.gd" type="Script" id=6]
+[ext_resource path="res://game/CommandProcessor.gd" type="Script" id=1]
+[ext_resource path="res://ui/Input.gd" type="Script" id=2]
+[ext_resource path="res://game/RoomManager.gd" type="Script" id=3]
+[ext_resource path="res://game/Room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fonts/font_resources/plex_mono_28.tres" type="DynamicFont" id=5]
+[ext_resource path="res://game/Game.gd" type="Script" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
@@ -23,24 +23,24 @@ bg_color = Color( 0.355469, 0.355469, 0.355469, 1 )
 [node name="Game" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CommandProcessor" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="RoomManager" type="Node" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 3 )
 
-[node name="HouseRoom" parent="RoomManager" instance=ExtResource( 5 )]
+[node name="HouseRoom" parent="RoomManager" instance=ExtResource( 4 )]
 margin_top = -300.0
 margin_bottom = -100.0
 room_name = "a house"
 room_description = "a random house that you do not recognize."
 
-[node name="OutsideRoom" parent="RoomManager" instance=ExtResource( 5 )]
+[node name="OutsideRoom" parent="RoomManager" instance=ExtResource( 4 )]
 margin_left = 279.0
 margin_top = -300.0
 margin_right = 529.0
@@ -104,7 +104,7 @@ margin_bottom = 60.0
 margin_top = 11.0
 margin_right = 51.0
 margin_bottom = 48.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 text = " > "
 
 [node name="Input" type="LineEdit" parent="Background/MarginContainer/Rows/InputArea/HBoxContainer"]
@@ -114,9 +114,9 @@ margin_bottom = 60.0
 size_flags_horizontal = 3
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 max_length = 48
 caret_blink = true
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 [connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]
 [connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]

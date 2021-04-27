@@ -39,8 +39,9 @@ func go(second_word: String) -> String:
 	
 	# If the second word is a valid exit to the current room
 	if current_room.exits.keys().has(second_word):
+		var exit = current_room.exits[second_word]
 		# Change to the new room in that direction
-		var change_response = change_room(current_room.exits[second_word])
+		var change_response = change_room(exit.get_other_room(current_room))
 		return PoolStringArray(["You go %s." % second_word, change_response]).join("\n")
 	# There is no exit in that direction
 	else:

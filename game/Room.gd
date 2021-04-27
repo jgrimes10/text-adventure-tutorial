@@ -24,19 +24,25 @@ func set_room_description(new_description: String) -> void:
 
 
 func connect_exit(direction: String, room_to_connect: Room) -> void:
+	# Create a new exit resource
+	var exit = Exit.new()
+	# Set room_1 to the room doing the connecting
+	exit.room_1 = self
+	# Set room_2 to the room being connected to
+	exit.room_2 = room_to_connect
+	# Set the exit resource to the correct direction
+	exits[direction] = exit
+	# Connect the reverse direction of the next room back to this room
+	# using the same exit resource object
 	match direction:
 		"north":
-			exits[direction] = room_to_connect
-			room_to_connect.exits["south"] = self
+			room_to_connect.exits["south"] = exit
 		"east":
-			exits[direction] = room_to_connect
-			room_to_connect.exits["west"] = self
+			room_to_connect.exits["west"] = exit
 		"south":
-			exits[direction] = room_to_connect
-			room_to_connect.exits["north"] = self
+			room_to_connect.exits["north"] = exit
 		"west":
-			exits[direction] = room_to_connect
-			room_to_connect.exits["east"] = self
+			room_to_connect.exits["east"] = exit
 		_:
 			printerr("Tried to connect invalid direction: %s", direction)
 		

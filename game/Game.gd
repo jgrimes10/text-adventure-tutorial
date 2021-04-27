@@ -3,10 +3,10 @@ extends Control
 
 # Get a copy of the Response so that we can add Game text without
 # an input attached to it
-const Response = preload("res://Response.tscn")
+const Response = preload("res://ui/Response.tscn")
 # Get a copy of the InputResponse scene so we can make copies of it
 # whenever text is input to show in the GameInfo
-const InputResponse = preload("res://InputResponse.tscn")
+const InputResponse = preload("res://ui/InputResponse.tscn")
 
 # The maximum amount of previous entries that will be remembered
 # before the game starts "forgetting" the older lines
