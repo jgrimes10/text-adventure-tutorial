@@ -1,6 +1,16 @@
 extends Node
 
 
+signal response_generated(response_text)
+
+# The room the player is currently in
+var current_room: Room = null
+
+
+func initialize(starting_room: Room) -> void:
+	change_room(starting_room)
+
+
 func process_command(input: String) -> String:
 	# Split up the input into separate words
 	var words = input.split(" ", false, 0)
@@ -33,3 +43,10 @@ func go(second_word: String) -> String:
 
 func help() -> String:
 	return "You can use these commands: go [location], help"
+
+
+func change_room(new_room: Room) -> void:
+	# Update the current_room variable to keep track of where the player is
+	current_room = new_room
+	emit_signal("response_generated", "You go to " + new_room.room_name)
+	emit_signal("response_generated", new_room.room_description)

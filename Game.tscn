@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Input.gd" type="Script" id=1]
 [ext_resource path="res://fonts/font_resources/plex_mono_28.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game.gd" type="Script" id=3]
 [ext_resource path="res://CommandProcessor.gd" type="Script" id=4]
+[ext_resource path="res://Room.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
@@ -28,6 +29,14 @@ __meta__ = {
 
 [node name="CommandProcessor" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="RoomManager" type="Node" parent="."]
+
+[node name="HouseRoom" parent="RoomManager" instance=ExtResource( 5 )]
+margin_top = -300.0
+margin_bottom = -100.0
+room_name = "House"
+room_description = "A random house."
 
 [node name="Background" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -100,5 +109,5 @@ max_length = 48
 caret_blink = true
 script = ExtResource( 1 )
 
-[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]
 [connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
+[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]

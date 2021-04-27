@@ -21,6 +21,8 @@ onready var history_rows = $Background/MarginContainer/Rows/GameInfo/Scroll/Hist
 onready var scroll = $Background/MarginContainer/Rows/GameInfo/Scroll
 # Grab the v_scrollbar so we can scroll down to the bottom when new input is sent
 onready var scrollbar = scroll.get_v_scrollbar()
+# Grab the RoomManager so we can use it
+onready var room_manager = $RoomManager
 
 var max_scroll_length := 0         # The current length of the ScrollContainer
 
@@ -30,10 +32,13 @@ func _ready() -> void:
 	scrollbar.connect("changed", self, "handle_scrollbar_changed")
 	# Set the max_scroll_length to its current max value
 	max_scroll_length = scrollbar.max_value
-	# Create a new response to add starting text to the game
-	var starting_message = Response.instance()
-	starting_message.text = "You find yourself in a house, with no memory of how you got there. You need to find your way out. You can type 'help' to see your available commands"
-	add_response_to_game(starting_message)
+	
+	# Connect to the signal from the CommandProcessor that a response
+	# has been generated
+	command_processor.connect("response_generated", self, "handle_response_generated")
+	# Initialize the CommandProcessor and give it
+	# the first child of the RoomManager
+	command_processor.initialize(room_manager.get_child(0))
 
 
 func handle_scrollbar_changed() -> void:
@@ -66,6 +71,15 @@ func add_response_to_game(response: Control) -> void:
 	history_rows.add_child(response)
 	
 	delete_history_beyond_limit()
+
+
+func handle_response_generated(response_text: String) -> void:
+	# Create a new response to add starting text to the game
+	var response = Response.instance()
+	# Set some starting text to be displayed when the game is first started
+	response.text = response_text
+	# Add the starting text to the screen
+	add_response_to_game(response)
 
 
 func delete_history_beyond_limit() -> void:
