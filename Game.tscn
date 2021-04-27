@@ -14,9 +14,9 @@ bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.355469, 0.355469, 0.355469, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=5]
-
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -90,11 +90,12 @@ margin_left = 55.0
 margin_right = 984.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 max_length = 48
 caret_blink = true
 script = ExtResource( 1 )
-[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]
+
 [connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]
+[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]

@@ -14,5 +14,7 @@ func _on_Input_text_entered(new_text: String) -> void:
 	# Create an instance of the InputResponse scene when
 	# text is entered
 	var input_response = InputResponse.instance()
+	# Set the text for the newly created input_response to show in the GameInfo
+	input_response.set_text(new_text, "This is what the game will respond with.")
 	# Add the InputResponse as a child of the history_rows node
 	history_rows.add_child(input_response)
