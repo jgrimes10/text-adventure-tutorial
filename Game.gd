@@ -1,6 +1,9 @@
 extends Control
 
 
+# Get a copy of the Response so that we can add Game text without
+# an input attached to it
+const Response = preload("res://Response.tscn")
 # Get a copy of the InputResponse scene so we can make copies of it
 # whenever text is input to show in the GameInfo
 const InputResponse = preload("res://InputResponse.tscn")
@@ -27,6 +30,10 @@ func _ready() -> void:
 	scrollbar.connect("changed", self, "handle_scrollbar_changed")
 	# Set the max_scroll_length to its current max value
 	max_scroll_length = scrollbar.max_value
+	# Create a new response to add starting text to the game
+	var starting_message = Response.instance()
+	starting_message.text = "You find yourself in a house, with no memory of how you got there. You need to find your way out. You can type 'help' to see your available commands"
+	add_response_to_game(starting_message)
 
 
 func handle_scrollbar_changed() -> void:
@@ -50,8 +57,13 @@ func _on_Input_text_entered(new_text: String) -> void:
 	var response = command_processor.process_command(new_text)
 	# Set the text for the newly created input_response to show in the GameInfo
 	input_response.set_text(new_text, response)
+	# Add the InputResponse to the Game
+	add_response_to_game(input_response)
+
+
+func add_response_to_game(response: Control) -> void:
 	# Add the InputResponse as a child of the history_rows node
-	history_rows.add_child(input_response)
+	history_rows.add_child(response)
 	
 	delete_history_beyond_limit()
 

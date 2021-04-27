@@ -8,7 +8,7 @@ func _ready() -> void:
 	grab_focus()
 
 
-func _on_Input_text_entered(new_text: String) -> void:
+func _on_Input_text_entered(_new_text: String) -> void:
 	# TODO: If desired, in the future, store the previous commands and
 	# allow the player to cycle through them for quick inputs
 
