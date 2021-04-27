@@ -9,6 +9,8 @@ const InputResponse = preload("res://InputResponse.tscn")
 # before the game starts "forgetting" the older lines
 export (int) var max_lines_remembered := 30
 
+# Grab the CommandProcessor so we can use it
+onready var command_processor = $CommandProcessor
 # Grab the history_rows node so we can make the new InputReponse
 # scenes children of it
 onready var history_rows = $Background/MarginContainer/Rows/GameInfo/Scroll/HistoryRows
@@ -44,11 +46,17 @@ func _on_Input_text_entered(new_text: String) -> void:
 	# Create an instance of the InputResponse scene when
 	# text is entered
 	var input_response = InputResponse.instance()
+	# Send the text to be processed
+	var response = command_processor.process_command(new_text)
 	# Set the text for the newly created input_response to show in the GameInfo
-	input_response.set_text(new_text, "This is what the game will respond with.")
+	input_response.set_text(new_text, response)
 	# Add the InputResponse as a child of the history_rows node
 	history_rows.add_child(input_response)
 	
+	delete_history_beyond_limit()
+
+
+func delete_history_beyond_limit() -> void:
 	# Check if there are more rows than the maximum amount of rows allowed
 	if history_rows.get_child_count() > max_lines_remembered:
 		# Figure out the number of rows over the maximum allowed
