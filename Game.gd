@@ -34,14 +34,12 @@ func _ready() -> void:
 	max_scroll_length = scrollbar.max_value
 	
 	# Add some starting text to welcome the player and give some staring info
-	handle_response_generated("Welcome to the retro text adventure. You can type 'help' to see available commands.")
+	create_response("Welcome to the retro text adventure. You can type 'help' to see available commands.")
 	
-	# Connect to the signal from the CommandProcessor that a response
-	# has been generated
-	command_processor.connect("response_generated", self, "handle_response_generated")
 	# Initialize the CommandProcessor and give it
 	# the first child of the RoomManager
-	command_processor.initialize(room_manager.get_child(0))
+	var starting_room_response = command_processor.initialize(room_manager.get_child(0))
+	create_response(starting_room_response)
 
 
 func handle_scrollbar_changed() -> void:
@@ -76,7 +74,7 @@ func add_response_to_game(response: Control) -> void:
 	delete_history_beyond_limit()
 
 
-func handle_response_generated(response_text: String) -> void:
+func create_response(response_text: String) -> void:
 	# Create a new response to add starting text to the game
 	var response = Response.instance()
 	# Set some starting text to be displayed when the game is first started
