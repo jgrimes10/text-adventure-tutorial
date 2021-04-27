@@ -33,6 +33,9 @@ func _ready() -> void:
 	# Set the max_scroll_length to its current max value
 	max_scroll_length = scrollbar.max_value
 	
+	# Add some starting text to welcome the player and give some staring info
+	handle_response_generated("Welcome to the retro text adventure. You can type 'help' to see available commands.")
+	
 	# Connect to the signal from the CommandProcessor that a response
 	# has been generated
 	command_processor.connect("response_generated", self, "handle_response_generated")

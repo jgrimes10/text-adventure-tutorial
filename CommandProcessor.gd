@@ -48,5 +48,9 @@ func help() -> String:
 func change_room(new_room: Room) -> void:
 	# Update the current_room variable to keep track of where the player is
 	current_room = new_room
-	emit_signal("response_generated", "You go to " + new_room.room_name)
-	emit_signal("response_generated", new_room.room_description)
+	# Create a variable to hold all of the responses to join together
+	var strings = PoolStringArray([
+		"You are now in: " + new_room.room_name + ". It is " + new_room.room_description,
+		"Exits: "
+	]).join("\n")
+	emit_signal("response_generated", strings)
