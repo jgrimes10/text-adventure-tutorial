@@ -30,6 +30,10 @@ config/name="Text Adventure"
 run/main_scene="res://game/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Types="*res://globals/Types.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
